@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "paths": {
+      "@repo/db": ["../../packages/db/src/index.ts"]
+    },
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
     /* Projects */
