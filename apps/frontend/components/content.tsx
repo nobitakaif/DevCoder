@@ -61,14 +61,15 @@ const dummy = [
 
 
 export function Content() {
-    return <div className="pt-24 px-4 ">
+    return <div className="pt-24 px-4  ">
+        
         <div className="bg-white/80 rounded-lg h-screen">
             <table className="w-full ">
                 <table className="w-full ">
                     <thead>
-                        <tr className=" text-2xl capitalize">
-                            <th className="p-3 text-left">name</th>
-                            <th className="p-3 text-left    ">id</th>
+                        <tr className=" text-2xl capitalize text-black">
+                            <th className="p-3 text-left ">name</th>
+                            <th className="p-3 text-left">id</th>
                             <th className="p-3 text-left">description</th>
                             <th className="p-3 text-left">language</th>
                             <th className="p-3 text-left">total submit</th>
@@ -78,7 +79,7 @@ export function Content() {
                     <tbody>
                         
                         {dummy.map((data) => (
-                            <tr key={data.id} className="cursor-pointer hover:border">
+                            <tr key={data.id} className="cursor-pointer hover:border text-black">
                                 <td className="p-3">{data.id}</td>
                                 <td className="p-3">{data.name}</td>
                                 <td className="p-3">{data.description}</td>

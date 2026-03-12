@@ -7,17 +7,21 @@ import Editor from "@monaco-editor/react";
 const dummy = [{
         id: "101",
         name: "Authentication",
+        shortDescription : `Design and implement a simple authentication system that supports user signup and signin using JWT tokens.
+        You need to build two API endpoints`,
+        example : ["Signup endpoint where a user registers with an email and password","Signin endpoint where the user logs in and receives a JWT token.","The password must be securely hashed before storing it in the database. When the user signs in, the server should verify the password and return a valid JWT token if the credentials are correct.","The JWT token should contain the user's id and should expire after a specific duration (for example: 24 hours)."],
+        routes : [{
+          input : {
+              "email": "user@example.com",
+              "password": "mypassword123"
+          },
+          output : {
+              "message": "User created successfully"
+              }
+        }],
         description: `
-        Design and implement a simple authentication system that supports user signup and signin using JWT tokens.
-
-        You need to build two API endpoints:
-
-        1. Signup endpoint where a user registers with an email and password.
-        2. Signin endpoint where the user logs in and receives a JWT token.
-
-        The password must be securely hashed before storing it in the database. When the user signs in, the server should verify the password and return a valid JWT token if the credentials are correct.
-
-        The JWT token should contain the user's id and should expire after a specific duration (for example: 24 hours).
+        
+        
 
         You must ensure:
         • Passwords are hashed using a secure hashing algorithm (bcrypt recommended).
@@ -28,15 +32,10 @@ const dummy = [{
 
         Input:
         POST /signup
-        {
-        "email": "user@example.com",
-        "password": "mypassword123"
-        }
+        
 
         Output:
-        {
-        "message": "User created successfully"
-        }
+        
 
         Example 2:
 
@@ -77,22 +76,77 @@ const dummy = [{
     }
 ]
 
-
-
-
-
-
 export default function Page() {
   return (
     <Split
       className="flex h-screen "
-      sizes={[30, 70]}
+      sizes={[50, 50]}
       minSize={200}
       gutterSize={10}
       direction="horizontal"
       cursor="col-resize"
     >
-      <div className="bg-white p-4">Description</div>
+      <div className="bg-white p-4">
+        {dummy.map((item)=>(
+          <div className="text-black flex flex-col gap-3">
+              <div className="flex gap-3">
+                <div className=" text-4xl font-bold">{item.id}.</div>
+                <div className=" text-4xl font-bold">{item.name}</div>
+              </div>
+              <div className="">
+                <div className="text-lg">{item.shortDescription}</div>
+              </div>
+              <div className="">
+                <span className="font-semibold text-xl">Rule.</span>
+                <div className="bg-[#f0f8ff] text-black rounded-lg shadow-lg">
+                    {item.example.map((ex, idx) =>(
+                        <div className="px-4 py-2" key={idx}>
+                                {++idx}. {ex}
+                              </div>
+                              ))}
+                        </div>
+                </div>
+                <div>
+                  <span className="font-bold text-xl ">Routes.</span>
+                  <div className="font-semibold">Success Response</div>
+                  <div>
+                    {/* input  */}
+                      <div className="flex">
+                        {item.routes.map((route)=>(
+                          <div className="flex justify-around w-full">
+                            <div className="bg-amber-200">
+                              <span className="block">email : {route.input?.email}</span>
+                              <span> password : {route.input?.password} </span>
+                            </div>
+                            <div>
+                              response : {route.output?.message}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      {/* success output */}
+                      <div>
+                        
+                        
+                      </div>
+                  </div>
+                  <div className="font-semibold">Failed Response</div>
+                  <div>
+                    {/* input */}
+                      <div>
+
+                      </div>
+                      {/* failed out */}
+                      <div>
+                        
+                      </div>
+                  </div>
+                </div>
+                
+          </div>
+          
+        ))}
+      </div>
       <div className="bg-gray-900 text-white p-4">Code Editor
         <Editor
             height="100%"
