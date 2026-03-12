@@ -1,14 +1,12 @@
 import { ModeToggle } from "@/components/mode-toggle";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Github, GithubIcon } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import Link from "next/link";
+import AuthPage from "@/components/auth";
 
 export default function Signup(){
-    return <div className="h-screen w-full flex justify-center items-center">
-        <Card className="h-112 w-92 ">
-            <CardHeader className="">
-                <CardTitle className="text-center text-2xl font-bold">Signup</CardTitle>
-                <CardDescription className="text-center text-lg">Please login to use our service</CardDescription>
-            </CardHeader>
-        </Card>
-        
-    </div>
+    return <AuthPage type="signup"/>
 }
