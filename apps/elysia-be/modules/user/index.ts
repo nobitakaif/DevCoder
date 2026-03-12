@@ -66,21 +66,19 @@ export const user = new Elysia({prefix : "/auth"})
     })
     .resolve(async ({cookie : {auth}, status,jwt})=>{
         if(!auth){
-            return status(401,{
-                msg : "auth is not present"
-            })
+            console.log("auth is not present")
+            return status(401)
         }
         const decoded = await jwt.verify(auth.value as string)
-        if(!decoded || decoded.id){
-            return status(401,{
-                msg : "token is incorrect"
-            })
+        if(!decoded || decoded.id){    
+            console.log("token inocorrect")
+            return status(401)
         }
-        return status(200,{
-            userId : decoded.id as string
-        })
+        return {
+            userId : decoded.sub as string
+        }
     })
-    .get("/me", async({userId})=>{
+    .get("/me", async({userId, status})=>{
         console.log(userId)
         const userData = await UserService.getProfile(userId!)
 

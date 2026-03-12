@@ -1,15 +1,19 @@
 {
-  "name": "elysia",
+  "name": "@repo/be",
   "version": "1.0.50",
+  "exports": {
+    ".": "./src/app.ts"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
+    "@elysiajs/cors": "^1.4.1",
     "@elysiajs/jwt": "^1.4.1",
     "@prisma/client": "^7.4.2",
     "@repo/db": "workspace:*",
-    "elysia": "latest"
+    "elysia": "^1.4.27"
   },
   "devDependencies": {
     "bun-types": "latest"
