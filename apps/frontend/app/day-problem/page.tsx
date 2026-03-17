@@ -3,6 +3,7 @@
 
 import Split from "react-split";
 import Editor from "@monaco-editor/react";
+import CodeEditor from "./code-editor";
 
 const dummy = [{
         id: "101",
@@ -11,9 +12,16 @@ const dummy = [{
         You need to build two API endpoints`,
         example : ["Signup endpoint where a user registers with an email and password","Signin endpoint where the user logs in and receives a JWT token.","The password must be securely hashed before storing it in the database. When the user signs in, the server should verify the password and return a valid JWT token if the credentials are correct.","The JWT token should contain the user's id and should expire after a specific duration (for example: 24 hours)."],
         routes : [{
-          input : {
+          "0" : {
+            GET:"/health-check",
+            status : "200"
+          },
+          "1":{
+            POST : "/auth/signup",
+            Body : {
               "email": "user@example.com",
               "password": "mypassword123"
+            }
           },
           output : {
               "message": "User created successfully"
@@ -88,7 +96,7 @@ export default function Page() {
     >
       <div className="bg-white p-4">
         {dummy.map((item)=>(
-          <div className="text-black flex flex-col gap-3">
+          <div className="text-black flex flex-col gap-3" key={item.id}>
               <div className="flex gap-3">
                 <div className=" text-4xl font-bold">{item.id}.</div>
                 <div className=" text-4xl font-bold">{item.name}</div>
@@ -112,16 +120,20 @@ export default function Page() {
                   <div>
                     {/* input  */}
                       <div className="flex">
-                        {item.routes.map((route)=>(
-                          <div className="flex justify-around w-full">
-                            <div className="bg-amber-200">
-                              <span className="block">email : {route.input?.email}</span>
-                              <span> password : {route.input?.password} </span>
+                        {item.routes.map((route, idx)=>(
+                         <div key={idx}  className="flex flex-col gap-3" >
+                            <div>
+                               <span className="text-green-400 font-bold">GET :</span>
+                              <span className=" bg-[rgb(104,177,213)] rounded-md px-1 py-0.5 text-center text-[rgb(5,46,65)]">{route[0].GET}</span>
+                              <span className="ml-3 font-semibold">Response - </span>
+                              <span>status : {route[0].status}</span>
                             </div>
                             <div>
-                              response : {route.output?.message}
+                               <span className="text-green-400 font-bold">POST : </span>
+                               <span className=" bg-[rgb(104,177,213)] rounded-md px-1 py-0.5 text-center text-[rgb(5,46,65)]">{route[1].POST}</span>
+                               <span className="block ml-8 font-semibold">Body : <span></span></span>
                             </div>
-                          </div>
+                         </div>
                         ))}
                       </div>
                       {/* success output */}
@@ -148,12 +160,7 @@ export default function Page() {
         ))}
       </div>
       <div className="bg-gray-900 text-white p-4">Code Editor
-        <Editor
-            height="100%"
-            language="javascript"
-            defaultValue="// write code"
-            
-            />
+        <CodeEditor/>
       </div>
     </Split>
   );

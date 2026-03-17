@@ -86,7 +86,7 @@ export default function AuthForm({type} : {type:string}){
             )}
         </div>
         <div className="mt-4 w-full flex flex-col gap-3">
-            <Button type="submit" disabled={mutation.isPending || mutation.isSuccess} variant="default" className="w-full dark:bg-white dark:text-black cursor-pointer">
+            <Button type="submit" disabled={mutation.isPending || mutation.isSuccess} variant="outline" className="w-full dark:bg-white dark:text-black cursor-pointer">
                 {mutation.isPending ? (
                 <>
                     <Loader2 className="size-4 animate-spin" />
